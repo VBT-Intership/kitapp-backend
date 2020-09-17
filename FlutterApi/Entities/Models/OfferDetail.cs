@@ -14,7 +14,6 @@ namespace Entities.Models
         public int SellDetalId {get;set;}
         public DateTime OfferDate {get;set;}
         public int OfferStatus { get; set; }
-        public int colorType { get; set; }
         public int OfferUserId { get; set; }
         public double OfferPrice { get; set; }
 
