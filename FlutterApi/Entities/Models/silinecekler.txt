@@ -1,4 +1,0 @@
-SubCategories.cs
-PurchaseHistory.cs
-Products.cs => BookTag ile değiştirildi
-PruductPhotos.cs => BookTag de url tutuluyor
