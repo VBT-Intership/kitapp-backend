@@ -11,7 +11,7 @@ namespace Entities.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ShopId {get;set;}
+        public int sellId {get;set;}
         public double ProductPrice {get;set;}
         public DateTime PublishDate { get; set; }
         public bool IsActive { get; set; }
@@ -19,12 +19,15 @@ namespace Entities.Models
         public double OfferPrice { get; set; }
 
 
-        public int BooksId { get; set; }
-        [ForeignKey("BookId")]
-        public virtual BookTag BookTag { get; set; }
+        public int bookId { get; set; }
+        [ForeignKey("bookId")]
+        public virtual Books Books { get; set; }
 
         public int userId { get; set; }
         [ForeignKey("userId")]
         public virtual Users Users { get; set; }
+
+        public virtual ICollection<OfferDetail> OfferDetail { get; set; }
+
     }
 }

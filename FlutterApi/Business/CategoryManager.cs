@@ -22,5 +22,31 @@ namespace SiparisTakip.Bll
         {
             return categoriesRepository.GetCategories();
         }
+
+        Categories GetCategoriesById(int categoryId, bool IncludeBooks)
+        {
+            return categoriesRepository.GetCategoriesById(categoryId, IncludeBooks);
+        }
+
+        public List<Categories> GetUserFavoriteCategories(int userId)
+        {
+            return categoriesRepository.GetUserFavoriteCategories(userId);
+        }
+
+        public bool MakeFavorite(int userId, int categoryId)
+        {
+            return categoriesRepository.MakeFavorite(userId, categoryId);
+        }
+        public bool RemoveFavorite(int userId, int categoryId)
+        {
+            return categoriesRepository.RemoveFavorite(userId, categoryId);
+
+        }
+        Categories ICategoriesService.GetCategoriesById(int categoryId, bool IncludeBooks)
+        {
+            throw new NotImplementedException();
+        }
+
+     
     }
 }

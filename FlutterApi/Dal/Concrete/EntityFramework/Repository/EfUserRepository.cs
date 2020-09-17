@@ -14,21 +14,19 @@ namespace Dal.Concrete.EntityFramework.Repository
         {
             
         }
-      
 
-        public List<Products> FavoriteProducts(int userId)
+        public Users Login(string email, string password)
         {
-            throw new NotImplementedException();
+            return context.Users.FirstOrDefault(x => x.Email == email && x.Password == password);
         }
 
-        public List<Products> PurchasedProducts(int userId)
+        public Users RegisterUser(Users user)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Products> StarsProducts(int userId)
-        {
-            throw new NotImplementedException();
+            user.IsActive = true;
+            user.IDate = DateTime.Now;
+            context.Users.Add(user);
+            context.SaveChanges();
+            return user;
         }
     }
 }

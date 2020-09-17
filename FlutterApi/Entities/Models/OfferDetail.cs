@@ -11,15 +11,19 @@ namespace Entities.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int SellDetalId {get;set;}
+        public int OfferDetalId {get;set;}
         public DateTime OfferDate {get;set;}
         public int OfferStatus { get; set; }
         public int OfferUserId { get; set; }
         public double OfferPrice { get; set; }
 
 
-        public int BooksId { get; set; }
-        [ForeignKey("BookId")]
-        public virtual BookTag BookTag { get; set; }
+        public int userId { get; set; }
+        [ForeignKey("userId")]
+        public virtual Users Users { get; set; }
+
+        public int SellDetalId { get; set; }
+        [ForeignKey("SellDetalId")]
+        public virtual SellDetail SellDetail { get; set; }
     }
 }

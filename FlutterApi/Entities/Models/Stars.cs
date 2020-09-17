@@ -17,9 +17,10 @@ namespace Entities.Models
         public DateTime PublishDate { get; set; }
         public bool IsActive { get; set; }
 
-        public int BookId { get; set; }
-        [ForeignKey("BookId")]
-        public virtual BookTag BookTag { get; set; }
+        public int bookId { get; set; }
+        [ForeignKey("bookId")]
+        public virtual Books Books { get; set; }
+        public virtual Stars UserStars { get; set; }
 
 
         public int userId { get; set; }

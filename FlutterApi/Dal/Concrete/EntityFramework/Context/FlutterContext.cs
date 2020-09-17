@@ -21,30 +21,48 @@ namespace Dal.Concrete.EntityFramework.Context
         }
 
         public virtual DbSet<Categories> Categories { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<ProductPhotos> ProductPhotos { get; set; }
-        public virtual DbSet<PurchaseHistory> PurchaseHistory { get; set; }
-        public virtual DbSet<SubCategories> SubCategories { get; set; }
+        public virtual DbSet<Books> Books { get; set; }
+        public virtual DbSet<OfferDetail> OfferDetail { get; set; }
+        public virtual DbSet<SellDetail> SellDetail { get; set; }
+        public virtual DbSet<Stars> Stars { get; set; }
+        public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<UserFavorites> UserFavorites { get; set; }
+        public virtual DbSet<UserFavoritesCategories> UserFavoritesCategories { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<UserStars> UserStars { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Products>()
+            modelBuilder.Entity<Books>()
                .HasOne(p => p.Categories)
-               .WithMany(b => b.Products).HasForeignKey(x => x.categoryId);
+               .WithMany(b => b.Books).HasForeignKey(x => x.categoryId).OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<OfferDetail>()
+             .HasOne(p => p.SellDetail)
+             .WithMany(b => b.OfferDetail).HasForeignKey(x => x.SellDetalId).OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<OfferDetail>()
+             .HasOne(p => p.Users)
+             .WithMany(b => b.OfferDetail).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<SellDetail>()
+          .HasOne(p => p.Users)
+          .WithMany(b => b.SellDetail).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Comments>()
+            .HasOne(p => p.Users)
+            .WithMany(b => b.Comments).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Comments>()
+           .HasOne(p => p.Books)
+           .WithMany(b => b.Comments).HasForeignKey(x => x.bookId).OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Stars>()
+            .HasOne(p => p.Users)
+            .WithMany(b => b.UserStars).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Stars>()
+           .HasOne(p => p.Books)
+           .WithMany(b => b.UserStars).HasForeignKey(x => x.bookId).OnDelete(DeleteBehavior.Cascade);
 
 
-            modelBuilder.Entity<ProductPhotos>()
-             .HasOne(p => p.Products)
-             .WithMany(b => b.ProductPhotos).HasForeignKey(x => x.productId);
-
-            modelBuilder.Entity<SubCategories>()
-             .HasOne(p => p.Products)
-             .WithMany(b => b.SubCategories).HasForeignKey(x => x.productId);
         }
 
 

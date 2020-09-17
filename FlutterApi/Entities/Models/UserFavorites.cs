@@ -13,9 +13,9 @@ namespace Entities.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int BooksId { get; set; }
-        [ForeignKey("BookId")]
-        public virtual BookTag BookTag { get; set; }
+        public int bookId { get; set; }
+        [ForeignKey("bookId")]
+        public virtual Books Books { get; set; }
 
         public int userId { get; set; }
         [ForeignKey("userId")]

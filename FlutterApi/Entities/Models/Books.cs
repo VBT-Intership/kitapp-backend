@@ -7,11 +7,12 @@ using System.Text;
 namespace Entities.Models
 {
 
-    [Table("BookTag")]
-    public  class BookTag
+    [Table("Books")]
+    public  class Books
     {
-        
-        public int BookId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int bookId { get; set; }
         public string BookName { get; set; }
         public string Isbn { get; set; }
         public bool IsFavorite { get; set; }
@@ -25,7 +26,6 @@ namespace Entities.Models
         public string TypeofPaper { get; set; }
         public string WriterName { get; set; }
         public double BookStarCount { get; set; }
-        public int CategoryId { get; set; }
 
 
         [NotMapped]
@@ -33,8 +33,9 @@ namespace Entities.Models
         [NotMapped]
         public int UserStarCount { get; set; }
 
-        public virtual ICollection<ProductPhotos> ProductPhotos { get; set; }
-        public virtual ICollection<SubCategories> SubCategories { get; set; }
+
+        public virtual ICollection<Comments> Comments { get; set; }
+        public virtual ICollection<Stars> UserStars { get; set; }
 
 
         public int categoryId { get; set; }

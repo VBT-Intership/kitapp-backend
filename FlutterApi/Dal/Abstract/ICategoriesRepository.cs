@@ -11,7 +11,9 @@ namespace Dal.AbstractInterfaces
     public interface ICategoriesRepository : IGenericRepository<Categories>
     {
         List<Categories> GetCategories();
-
-
+        Categories GetCategoriesById(int categoryId,bool IncludeBooks);
+        List<Categories> GetUserFavoriteCategories(int userId);
+        bool MakeFavorite(int userId, int categoryId);
+        bool RemoveFavorite(int userId, int categoryId);
     }
 }

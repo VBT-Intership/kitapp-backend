@@ -13,8 +13,10 @@ namespace Entities.Models
         public Users()
         {
             UserFavorites = new HashSet<UserFavorites>();
-            UserStars = new HashSet<UserStars>();
-            PurchaseHistory = new HashSet<PurchaseHistory>();
+            UserStars = new HashSet<Stars>();
+            SellDetail = new HashSet<SellDetail>();
+            OfferDetail = new HashSet<OfferDetail>();
+            UserFavoritesCategories = new HashSet<UserFavoritesCategories>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -23,6 +25,7 @@ namespace Entities.Models
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Token { get; set; }
+        public DateTime IDate { get; set; }
         public string RefreshToken { get; set; }
         public bool IsActive { get; set; }
         public string Adress { get; set; }
@@ -31,8 +34,11 @@ namespace Entities.Models
 
 
         public virtual ICollection<UserFavorites> UserFavorites { get; set; }
-        public virtual ICollection<UserStars> UserStars { get; set; }
-        public virtual ICollection<PurchaseHistory> PurchaseHistory { get; set; }
+        public virtual ICollection<UserFavoritesCategories> UserFavoritesCategories { get; set; }
+        public virtual ICollection<Stars> UserStars { get; set; }
+        public virtual ICollection<SellDetail> SellDetail { get; set; }
+        public virtual ICollection<OfferDetail> OfferDetail { get; set; }
+        public virtual ICollection<Comments> Comments { get; set; }
 
     }
 }

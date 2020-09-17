@@ -22,5 +22,29 @@ namespace FlutterApi.Controllers
             var categories = categoriesContext.GetAll();
             return Ok(categories);
         }
+        [HttpGet("{userId}/{includeBooks}")]
+        public IActionResult GetCategoriesById(int userId,bool includeBooks)
+        {
+            var categories = categoriesContext.GetCategoriesById(userId,includeBooks);
+            return Ok(categories);
+        }
+        [HttpGet("{userId}")]
+        public IActionResult GetUserFavoriteCategories(int userId)
+        {
+            var categories = categoriesContext.GetUserFavoriteCategories(userId);
+            return Ok(categories);
+        }
+        [HttpGet("{userId}/{categoryId}")]
+        public IActionResult MakeFavoriteCategory(int userId,int categoryId)
+        {
+            var categories = categoriesContext.MakeFavorite(userId,categoryId);
+            return Ok(categories);
+        }
+        [HttpGet("{userId}/{categoryId}")]
+        public IActionResult RemoveFavoriteCategory(int userId, int categoryId)
+        {
+            var categories = categoriesContext.RemoveFavorite(userId, categoryId);
+            return Ok(categories);
+        }
     }
 }

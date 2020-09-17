@@ -13,24 +13,27 @@ namespace FlutterApi.Controllers
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
-    public class ProductController : Controller
+    public class UserController : Controller
     {
-        IProductService productContext;
-        public ProductController(IProductService product)
+        IUserService userContext;
+        public UserController(IUserService user)
         {
-            this.productContext = product;
+            this.userContext = user;
         }
-        [HttpGet("{userId}/{productId}")]
-        public IActionResult GetProduct(int userId,int productId)
+
+        [HttpPost]
+        public IActionResult Login(string username,string password)
         {
-            var product = productContext.GetProduct(userId, productId);
+            var product = userContext.Login(username, password);
             return Ok(product);
         }
-        [HttpGet("")]
-        public IActionResult GetMostPopular()
+
+        [HttpPost]
+        public IActionResult Register(Users user)
         {
-            var product = productContext.GetMostPopular();
+            var product = userContext.RegisterUser(user);
             return Ok(product);
         }
+
     }
 }

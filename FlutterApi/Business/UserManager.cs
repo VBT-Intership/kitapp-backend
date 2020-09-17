@@ -19,19 +19,14 @@ namespace SiparisTakip.Bll
             this.userRepository = userRepository;
         }
 
-        public List<Products> FavoriteProducts(int userId)
+        public Users Login(string email, string password)
         {
-            throw new NotImplementedException();
+            return userRepository.Login(email, password);
         }
 
-        public List<Products> PurchasedProducts(int userId)
+        public Users RegisterUser(Users user)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Products> StarsProducts(int userId)
-        {
-            throw new NotImplementedException();
+            return userRepository.RegisterUser(user);
         }
     }
 }
