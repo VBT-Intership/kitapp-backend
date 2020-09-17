@@ -36,31 +36,31 @@ namespace Dal.Concrete.EntityFramework.Context
         {
             modelBuilder.Entity<Books>()
                .HasOne(p => p.Categories)
-               .WithMany(b => b.Books).HasForeignKey(x => x.categoryId).OnDelete(DeleteBehavior.Cascade);
+               .WithMany(b => b.Books).HasForeignKey(x => x.categoryId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<OfferDetail>()
              .HasOne(p => p.SellDetail)
-             .WithMany(b => b.OfferDetail).HasForeignKey(x => x.SellDetalId).OnDelete(DeleteBehavior.Cascade);
+             .WithMany(b => b.OfferDetail).HasForeignKey(x => x.SellDetalId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<OfferDetail>()
              .HasOne(p => p.Users)
-             .WithMany(b => b.OfferDetail).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.Cascade);
+             .WithMany(b => b.OfferDetail).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<SellDetail>()
           .HasOne(p => p.Users)
-          .WithMany(b => b.SellDetail).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.Cascade);
+          .WithMany(b => b.SellDetail).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Comments>()
             .HasOne(p => p.Users)
-            .WithMany(b => b.Comments).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.Cascade);
+            .WithMany(b => b.Comments).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Comments>()
            .HasOne(p => p.Books)
-           .WithMany(b => b.Comments).HasForeignKey(x => x.bookId).OnDelete(DeleteBehavior.Cascade);
+           .WithMany(b => b.Comments).HasForeignKey(x => x.bookId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Stars>()
             .HasOne(p => p.Users)
-            .WithMany(b => b.UserStars).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.Cascade);
+            .WithMany(b => b.UserStars).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Stars>()
            .HasOne(p => p.Books)
-           .WithMany(b => b.UserStars).HasForeignKey(x => x.bookId).OnDelete(DeleteBehavior.Cascade);
+           .WithMany(b => b.UserStars).HasForeignKey(x => x.bookId).OnDelete(DeleteBehavior.NoAction);
 
 
         }

@@ -68,5 +68,15 @@ namespace SiparisTakip.Bll
         {
             throw new NotImplementedException();
         }
+
+        public int addBook(Books book)
+        {
+            return bookRepository.addBook(book);
+        }
+
+        public bool deleteBook(int bookId)
+        {
+            return bookRepository.deleteBook(bookId);
+        }
     }
 }

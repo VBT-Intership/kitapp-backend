@@ -15,5 +15,7 @@ namespace Dal.AbstractInterfaces
         List<Categories> GetUserFavoriteCategories(int userId);
         bool MakeFavorite(int userId, int categoryId);
         bool RemoveFavorite(int userId, int categoryId);
+        int addCategory(Categories category);
+        bool deleteCategory(int categoryId);
     }
 }

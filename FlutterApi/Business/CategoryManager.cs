@@ -47,6 +47,14 @@ namespace SiparisTakip.Bll
             throw new NotImplementedException();
         }
 
-     
+        public int addCategory(Categories category)
+        {
+            return categoriesRepository.addCategory(category);
+        }
+
+        public bool deleteCategory(int categoryId)
+        {
+            return categoriesRepository.deleteCategory(categoryId);
+        }
     }
 }

@@ -67,5 +67,23 @@ namespace FlutterApi.Controllers
             var product = bookContext.RemoveComment(commentId);
             return Ok(product);
         }
+        [HttpPost]
+        public IActionResult AddBook(Books book)
+        {
+            var result = bookContext.addBook(book);
+            return Ok(result);
+        }
+        [HttpPost]
+        public IActionResult DeleteBook(int bookId)
+        {
+            var result = bookContext.deleteBook(bookId);
+            return Ok(result);
+        }
+        [HttpGet]
+        public IActionResult EmptyBooks()
+        {
+            Books books = new Books() { Comments = new List<Comments>(){ new Comments() { } },UserStars= new List<Stars>() { new Stars() { } } };
+            return Ok(books);
+        }
     }
 }

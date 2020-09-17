@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Entities.Models;
 using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,5 +47,24 @@ namespace FlutterApi.Controllers
             var categories = categoriesContext.RemoveFavorite(userId, categoryId);
             return Ok(categories);
         }
+        [HttpPost]
+        public IActionResult AddCategory(Categories category)
+        {
+            var result = categoriesContext.addCategory(category);
+            return Ok(result);
+        }
+        [HttpPost]
+        public IActionResult DeleteCategory(int categoryId)
+        {
+            var result = categoriesContext.deleteCategory(categoryId);
+            return Ok(result);
+        }
+        [HttpGet]
+        public IActionResult EmptyCategory()
+        {
+            Categories categories = new Categories() { };
+            return Ok(categories);
+        }
+
     }
 }

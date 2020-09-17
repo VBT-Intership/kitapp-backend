@@ -34,6 +34,11 @@ namespace FlutterApi.Controllers
             var product = userContext.RegisterUser(user);
             return Ok(product);
         }
-
+        [HttpGet]
+        public IActionResult EmptyUser()
+        {
+            Users users = new Users() { UserFavorites = new List<UserFavorites>() { new UserFavorites() { } }, UserFavoritesCategories = new List<UserFavoritesCategories>() { new UserFavoritesCategories() { } }, };
+            return Ok(users);
+        }
     }
 }

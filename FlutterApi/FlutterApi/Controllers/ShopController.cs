@@ -47,5 +47,11 @@ namespace FlutterApi.Controllers
             var product = shopContext.deleteSell(sellId);
             return Ok(product);
         }
+        [HttpGet]
+        public IActionResult EmptyShop()
+        {
+            SellDetail shop = new SellDetail() { OfferDetail = new List<OfferDetail>() { new OfferDetail() { SellDetail = new SellDetail() { } } }  };
+            return Ok(shop);
+        }
     }
 }

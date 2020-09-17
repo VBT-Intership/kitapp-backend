@@ -14,8 +14,8 @@ namespace Entities.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int bookId { get; set; }
         public string BookName { get; set; }
+        public string BookDetail { get; set; }
         public string Isbn { get; set; }
-        public bool IsFavorite { get; set; }
         public string ImageUrl { get; set; }
         public string CategoryOfBook { get; set; }
         public DateTime PublishedTime{ get; set; }

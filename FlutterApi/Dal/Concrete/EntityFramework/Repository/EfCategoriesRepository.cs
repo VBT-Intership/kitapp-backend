@@ -15,6 +15,20 @@ namespace Dal.Concrete.EntityFramework.Repository
         {
             
         }
+
+        public int addCategory(Categories category)
+        {
+            context.Categories.Add(category);
+            context.SaveChanges();
+            return category.Id;
+        }
+
+        public bool deleteCategory(int categoryId)
+        {
+            context.Categories.Remove(context.Categories.FirstOrDefault(x => x.Id == categoryId));
+            return true;
+        }
+
         public List<Categories> GetCategories()
         {
             return context.Categories.Include(x=>x.Books).ToList();

@@ -20,6 +20,9 @@ namespace Interfaces
         bool RemoveComment(int commentId);
         bool ChangeComment(int commentId, string comments, double starCount);
 
+        int addBook(Books book);
+        bool deleteBook(int bookId);
+
 
     }
 }

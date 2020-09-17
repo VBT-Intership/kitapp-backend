@@ -22,7 +22,7 @@ namespace Dal.Concrete.EntityFramework.Repository
             Books book = context.Books.FirstOrDefault(x => x.bookId == bookId);
             if (userId != 0)
             {
-                book.IsFavorite = context.UserFavorites.FirstOrDefault(x => x.bookId == bookId && x.userId == userId) == null ? false : true;
+                book.IsUserFavorite = context.UserFavorites.FirstOrDefault(x => x.bookId == bookId && x.userId == userId) == null ? false : true;
                 Stars starcount = context.Stars.FirstOrDefault(x => x.bookId == bookId && x.userId == userId);
                 book.UserStarCount = starcount == null ? 0 : starcount.StarCount;
             }
@@ -93,6 +93,19 @@ namespace Dal.Concrete.EntityFramework.Repository
         public List<Books> SearchBook(string name)
         {
             return context.Books.Where(x => x.BookName.Contains(name)).ToList();
+        }
+
+        public int addBook(Books book)
+        {
+            context.Books.Add(book);
+            context.SaveChanges();
+            return book.bookId;
+        }
+
+        public bool deleteBook(int bookId)
+        {
+            context.Books.Remove(context.Books.FirstOrDefault(x => x.bookId == bookId));
+            return true;
         }
     }
 }
