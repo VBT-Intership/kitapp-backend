@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,12 +6,18 @@ using System.Text;
 
 namespace Entities.Models
 {
-    [Table("UserFavorites")]
-    public class UserFavorites
+    [Table("SellDetail")]
+    public class SellDetail
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int ShopId {get;set;}
+        public double ProductPrice {get;set;}
+        public DateTime PublishDate { get; set; }
+        public bool IsActive { get; set; }
+        public int Status { get; set; }
+        public double OfferPrice { get; set; }
+
 
         public int BooksId { get; set; }
         [ForeignKey("BookId")]

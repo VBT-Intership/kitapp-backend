@@ -33,11 +33,11 @@ namespace Entities.Models
 
         public int BookId { get; set; }
         [ForeignKey("BookId")]
-        public virtual Products Products { get; set; }
+        public virtual BookTag BookTag { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]
-        public virtual Products BookTag { get; set; }
+        public virtual Users Users { get; set; }
 
 
     }
