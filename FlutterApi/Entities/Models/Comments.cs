@@ -17,16 +17,17 @@ namespace Entities.Models
         public DateTime PublisDate { get; set; }
         public bool IsFavorite { get; set; }
         public bool IsActive { get; set; }
-
+        [NotMapped]
+        public string userName { get; set; }
         public double UserStarCount { get; set; }
 
 
-        public int bookId { get; set; }
-        [ForeignKey("bookId")]
+        public int booksId { get; set; }
+        [ForeignKey("booksId")]
         public virtual Books Books { get; set; }
 
-        public int userId { get; set; }
-        [ForeignKey("userId")]
+        public int usersId { get; set; }
+        [ForeignKey("usersId")]
         public virtual Users Users { get; set; }
 
 

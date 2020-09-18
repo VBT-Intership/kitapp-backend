@@ -18,45 +18,95 @@ namespace Dal.Concrete.EntityFramework.Repository
 
         public int addCategory(Categories category)
         {
-            context.Categories.Add(category);
-            context.SaveChanges();
-            return category.Id;
+            try
+            {
+                context.Categories.Add(category);
+                context.SaveChanges();
+                return category.Id;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool deleteCategory(int categoryId)
         {
-            context.Categories.Remove(context.Categories.FirstOrDefault(x => x.Id == categoryId));
-            return true;
+            try
+            {
+                context.Categories.Remove(context.Categories.FirstOrDefault(x => x.Id == categoryId));
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Categories> GetCategories()
         {
-            return context.Categories.Include(x=>x.Books).ToList();
+            try
+            {
+                return context.Categories.Include(x => x.Books).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Categories GetCategoriesById(int categoryId,bool IncludeBooks)
         {
-            if(IncludeBooks)
-                return context.Categories.Where(x => x.Id == categoryId).Include(x=>x.Books).FirstOrDefault();
-            else
-                return context.Categories.Where(x => x.Id == categoryId).FirstOrDefault();
+            try
+            {
+                if (IncludeBooks)
+                    return context.Categories.Where(x => x.Id == categoryId).Include(x => x.Books).FirstOrDefault();
+                else
+                    return context.Categories.Where(x => x.Id == categoryId).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Categories> GetUserFavoriteCategories(int userId)
         {
-            return context.UserFavoritesCategories.Where(x => x.userId == userId).Include(x => x.Category).Select(x => x.Category).ToList();
+            try
+            {
+                return context.UserFavoritesCategories.Where(x => x.userId == userId).Include(x => x.Category).Select(x => x.Category).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool MakeFavorite(int userId, int categoryId)
         {
-            context.UserFavoritesCategories.Add(new UserFavoritesCategories() { categoryId = categoryId, userId = userId });
-            return Convert.ToBoolean(context.SaveChanges());
+            try
+            {
+                context.UserFavoritesCategories.Add(new UserFavoritesCategories() { categoryId = categoryId, userId = userId });
+                return Convert.ToBoolean(context.SaveChanges());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool RemoveFavorite(int userId, int categoryId)
         {
-            context.UserFavoritesCategories.Remove(context.UserFavoritesCategories.FirstOrDefault(x => x.categoryId == categoryId && x.userId==userId));
-            return Convert.ToBoolean(context.SaveChanges());
+            try
+            {
+                context.UserFavoritesCategories.Remove(context.UserFavoritesCategories.FirstOrDefault(x => x.categoryId == categoryId && x.userId == userId));
+                return Convert.ToBoolean(context.SaveChanges());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

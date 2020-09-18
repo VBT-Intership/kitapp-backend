@@ -50,10 +50,10 @@ namespace Dal.Concrete.EntityFramework.Context
           .WithMany(b => b.SellDetail).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Comments>()
             .HasOne(p => p.Users)
-            .WithMany(b => b.Comments).HasForeignKey(x => x.userId).OnDelete(DeleteBehavior.NoAction);
+            .WithMany(b => b.Comments).HasForeignKey(x => x.usersId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Comments>()
            .HasOne(p => p.Books)
-           .WithMany(b => b.Comments).HasForeignKey(x => x.bookId).OnDelete(DeleteBehavior.NoAction);
+           .WithMany(b => b.Comments).HasForeignKey(x => x.booksId).OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Stars>()
             .HasOne(p => p.Users)

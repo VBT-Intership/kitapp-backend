@@ -66,7 +66,7 @@ namespace SiparisTakip.Bll
 
         public List<Books> SearchBook(string name)
         {
-            throw new NotImplementedException();
+            return bookRepository.SearchBook(name);
         }
 
         public int addBook(Books book)

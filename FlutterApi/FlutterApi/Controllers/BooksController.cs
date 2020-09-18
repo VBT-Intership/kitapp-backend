@@ -16,6 +16,8 @@ namespace FlutterApi.Controllers
     public class BooksController : Controller
     {
         IBookService bookContext;
+
+        public static string lastText="test";
         public BooksController(IBookService book)
         {
             this.bookContext = book;
@@ -43,22 +45,24 @@ namespace FlutterApi.Controllers
         {
             return Ok(bookContext.GetMostPopular());
         }
-        [HttpGet("{bookname}")]
+        [HttpGet("{bookName}")]
         public IActionResult SearchBook(string bookName)
         {
             var product = bookContext.SearchBook(bookName);
             return Ok(product);
         }
         [HttpPost]
-        public IActionResult MakeComment(int userId,int bookId,string comment,double starCount)
+        public IActionResult MakeComment(object comments)
         {
-            var product = bookContext.MakeComment(userId,bookId,comment,starCount);
+            var datas = JsonConvert.DeserializeObject<Dictionary<string, object>>(comments.ToString());
+            var product = bookContext.MakeComment(Convert.ToInt32(datas["bookId"]), Convert.ToInt32(datas["userId"]), datas["comment"].ToString(), Convert.ToDouble(datas["userStarCount"]));
             return Ok(product);
         }
         [HttpPost]
-        public IActionResult ChangeComment(int commentId,string comment, double starCount)
+        public IActionResult ChangeComment(object comments)
         {
-            var product = bookContext.ChangeComment(commentId, comment, starCount);
+            var datas = JsonConvert.DeserializeObject<Dictionary<string, object>>(comments.ToString());
+            var product = bookContext.ChangeComment(Convert.ToInt32(datas["commentId"]),  datas["comment"].ToString(), Convert.ToDouble(datas["userStarCount"]));
             return Ok(product);
         }
         [HttpPost]
@@ -84,6 +88,11 @@ namespace FlutterApi.Controllers
         {
             Books books = new Books() { Comments = new List<Comments>(){ new Comments() { } },UserStars= new List<Stars>() { new Stars() { } } };
             return Ok(books);
+        }
+        [HttpGet]
+        public IActionResult getresult()
+        {
+            return Ok(lastText);
         }
     }
 }

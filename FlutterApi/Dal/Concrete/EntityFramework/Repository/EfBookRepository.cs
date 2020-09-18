@@ -19,25 +19,51 @@ namespace Dal.Concrete.EntityFramework.Repository
       
         public Books GetBookbyId(int userId, int bookId)
         {
-            Books book = context.Books.FirstOrDefault(x => x.bookId == bookId);
-            if (userId != 0)
+            try
             {
-                book.IsUserFavorite = context.UserFavorites.FirstOrDefault(x => x.bookId == bookId && x.userId == userId) == null ? false : true;
-                Stars starcount = context.Stars.FirstOrDefault(x => x.bookId == bookId && x.userId == userId);
-                book.UserStarCount = starcount == null ? 0 : starcount.StarCount;
+                Books book = context.Books.Where(x => x.bookId == bookId).Include(x => x.Comments).FirstOrDefault(); 
+                if (userId != 0)
+                {
+                    book.IsUserFavorite = context.UserFavorites.FirstOrDefault(x => x.bookId == bookId && x.userId == userId) == null ? false : true;
+                    Stars starcount = context.Stars.FirstOrDefault(x => x.bookId == bookId && x.userId == userId);
+                    book.UserStarCount = starcount == null ? 0 : starcount.StarCount;
+                    foreach (var item in book.Comments)
+                    {
+                        item.userName = context.Users.FirstOrDefault(x => x.Id == item.usersId).Name;
+                    }
+                }
+                return book;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
            
-            return book;
         }
 
         public List<Books> GetBookWithCategory(int categoryId)
         {
-            return context.Books.Where(x => x.categoryId == categoryId).ToList();
+            try
+            {
+                return context.Books.Where(x => x.categoryId == categoryId).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Books GetBookWithISBN(int userId, string ISBNNumber)
         {
-            return context.Books.FirstOrDefault(x => x.Isbn == ISBNNumber);
+            try
+            {
+                return context.Books.FirstOrDefault(x => x.Isbn == ISBNNumber);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Books> GetMostPopular()
@@ -57,55 +83,99 @@ namespace Dal.Concrete.EntityFramework.Repository
 
         public int MakeComment(int bookId,int userId,string comments, double starCount)
         {
-            Comments comment = new Comments() { 
-                bookId=bookId,
-                userId=userId,
-                comment=comments,
-                IsActive=true,
-                PublisDate=DateTime.Now,
-                UserStarCount=starCount
-            };
-            context.Comments.Add(comment);
-            context.SaveChanges();
-            return comment.CommentId;
+            try
+            {
+                Comments comment = new Comments()
+                {
+                    booksId = bookId,
+                    usersId = userId,
+                    comment = comments,
+                    IsActive = true,
+                    PublisDate = DateTime.Now,
+                    UserStarCount = starCount
+                };
+                context.Comments.Add(comment);
+                context.SaveChanges();
+                return comment.CommentId;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public bool ChangeComment(int commentId, string comments, double starCount)
         {
-            Comments comment = context.Comments.FirstOrDefault(x => x.CommentId == commentId);
-            if (comment != null)
+            try
             {
-                comment.comment = comments;
-                comment.UserStarCount = starCount;
-                context.Comments.Update(comment);
-                context.SaveChanges();
-                return true;
+                Comments comment = context.Comments.FirstOrDefault(x => x.CommentId == commentId);
+                if (comment != null)
+                {
+                    comment.comment = comments;
+                    comment.UserStarCount = starCount;
+                    context.Comments.Update(comment);
+                    context.SaveChanges();
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool RemoveComment(int commentId)
         {
-            context.Comments.Remove(context.Comments.FirstOrDefault(x => x.CommentId == commentId));
-            context.SaveChanges();
-            return true;
+            try
+            {
+                context.Comments.Remove(context.Comments.FirstOrDefault(x => x.CommentId == commentId));
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Books> SearchBook(string name)
         {
-            return context.Books.Where(x => x.BookName.Contains(name)).ToList();
+            try
+            {
+                return context.Books.Where(x => x.BookName.Contains(name)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public int addBook(Books book)
         {
-            context.Books.Add(book);
-            context.SaveChanges();
-            return book.bookId;
+            try
+            {
+                context.Books.Add(book);
+                context.SaveChanges();
+                return book.bookId;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
         }
 
         public bool deleteBook(int bookId)
         {
-            context.Books.Remove(context.Books.FirstOrDefault(x => x.bookId == bookId));
-            return true;
+            try
+            {
+                context.Books.Remove(context.Books.FirstOrDefault(x => x.bookId == bookId));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

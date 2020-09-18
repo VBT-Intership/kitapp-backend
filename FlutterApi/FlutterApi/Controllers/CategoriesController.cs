@@ -20,7 +20,7 @@ namespace FlutterApi.Controllers
         [HttpGet("")]
         public IActionResult GetAll()
         {
-            var categories = categoriesContext.GetAll();
+            var categories = categoriesContext.GetCategories();
             return Ok(categories);
         }
         [HttpGet("{userId}/{includeBooks}")]

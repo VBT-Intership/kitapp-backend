@@ -17,16 +17,30 @@ namespace Dal.Concrete.EntityFramework.Repository
 
         public Users Login(string email, string password)
         {
-            return context.Users.FirstOrDefault(x => x.Email == email && x.Password == password);
+            try
+            {
+                return context.Users.FirstOrDefault(x => x.Email == email && x.Password == password);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Users RegisterUser(Users user)
         {
-            user.IsActive = true;
-            user.IDate = DateTime.Now;
-            context.Users.Add(user);
-            context.SaveChanges();
-            return user;
+            try
+            {
+                user.IsActive = true;
+                user.IDate = DateTime.Now;
+                context.Users.Add(user);
+                context.SaveChanges();
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

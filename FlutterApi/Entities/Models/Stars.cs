@@ -20,7 +20,6 @@ namespace Entities.Models
         public int bookId { get; set; }
         [ForeignKey("bookId")]
         public virtual Books Books { get; set; }
-        public virtual Stars UserStars { get; set; }
 
 
         public int userId { get; set; }
